@@ -1,0 +1,1014 @@
+
+/* =============================================================================== Base */
+
+*:focus {
+    outline: none;
+}
+
+body {
+    line-height: 24px;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+#app-container {
+    /*width: 100%;*/
+    /*max-width: none;*/
+}
+
+.component {
+    display: none;
+}
+
+
+/* text */
+
+h1 {
+    font-size: 3em;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 1.5em;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 400;
+    opacity: 0.9;
+    margin: 70px auto 100px auto;
+    width: fit-content;
+    text-align: center;
+}
+
+a,
+a:visited {
+    color: #2e6da4;
+}
+
+.link-like {
+    text-decoration: underline;
+    color: #2e6da4;
+    cursor: pointer;
+}
+
+
+
+/* ========================================================================= Checkboxes */
+
+/* https://medium.com/claritydesignsystem/pure-css-accessible-checkboxes-and-radios-buttons-54063e759bb3 */
+
+/* hide default input box */
+.checkbox input[type="checkbox"] {
+    opacity: 0;
+}
+
+.checkbox label {
+    position: relative;
+    display: inline-block;
+    padding-left: 30px; /* 16px width of fake checkbox + 6px distance between fake checkbox and text */
+}
+
+.checkbox label::before,
+.checkbox label::after {
+    position: absolute;
+    content: ""; /* make the pseudo elements visible */
+    display: inline-block; /* needed for the line-height to take effect */
+}
+
+/* outer box */
+.checkbox label::before {
+    height: 16px;
+    width: 16px;
+    border: 1px solid #d4d4d5;
+    border-radius: 4px;
+    left: 0;
+    top: 3px; /* (24px line-height - 16px height of fake checkbox) / 2 - 1px for the border to vertically center it. */
+}
+.checkbox input[type="checkbox"]:hover + label::before {
+    border-color: #b2b3b3;
+}
+
+/* check mark */
+.checkbox label::after {
+    height: 4px;
+    width: 9px;
+    border-left: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: rotate(-45deg);
+    left: 4px;
+    top: 7px;
+}
+
+/* hide the check mark by default */
+.checkbox input[type="checkbox"] + label::after {
+    content: none;
+}
+
+/* unhide when checked */
+.checkbox input[type="checkbox"]:checked + label::after {
+    content: "";
+}
+
+/* hide the check mark by default */
+.checkbox input[type="checkbox"] + label::before {
+    background-color: transparent;
+    border-color: #d4d4d5;
+    transition: background-color 100ms linear,
+    border-color 100ms linear;
+}
+
+/* unhide when checked */
+.checkbox input[type="checkbox"]:checked + label::before {
+    background-color: #544da2;
+    border-color: #544da2;
+    transition: background-color 100ms linear,
+                border-color 100ms linear;
+
+}
+
+/* focus styles on the outer-box of the fake checkbox*/
+/*.checkbox input[type="checkbox"]:focus + label::before {
+    outline: rgb(59, 153, 252) auto 5px;
+}*/
+
+
+/* ====================================================================== Radio Buttons */
+
+
+/* https://medium.com/claritydesignsystem/pure-css-accessible-checkboxes-and-radios-buttons-54063e759bb3 */
+
+/* hide default input box */
+.radiobutton input[type="radio"] {
+    opacity: 0;
+}
+
+.radiobutton label {
+    position: relative;
+    display: inline-block;
+    padding-left: 30px; /* 16px width of fake checkbox + 6px distance between fake checkbox and text */
+}
+
+.radiobutton label::before,
+.radiobutton label::after {
+    position: absolute;
+    content: ""; /* make the pseudo elements visible */
+    display: inline-block; /* needed for the line-height to take effect */
+}
+
+/* outer box */
+.radiobutton label::before {
+    height: 16px;
+    width: 16px;
+    border: 1px solid #d4d4d5;
+    border-radius: 50%;
+    left: 0;
+    top: 3px; /* (24px line-height - 16px height of fake checkbox) / 2 - 1px for the border to vertically center it. */
+}
+.radiobutton input[type="radio"]:hover + label::before {
+    border-color: #b2b3b3;
+}
+
+/* check mark */
+.radiobutton label::after {
+    background-color: #544da2;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    left: 4px;
+    top: 7px;
+}
+
+/* hide the check mark by default */
+.radiobutton input[type="radio"] + label::after {
+    content: none;
+}
+
+/* unhide when checked */
+.radiobutton input[type="radio"]:checked + label::after {
+    content: "";
+}
+
+/* hide the check mark by default */
+.radiobutton input[type="radio"] + label::before {
+    background-color: transparent;
+    border-color: #d4d4d5;
+    transition: background-color 100ms linear,
+    border-color 100ms linear;
+}
+
+/* unhide when checked */
+.radiobutton input[type="radio"]:checked + label::before {
+    border-color: #544da2;
+    transition: background-color 100ms linear,
+    border-color 100ms linear;
+
+}
+
+
+/* ============================================================================ Landing */
+
+#landing {
+    height: 100vh;
+    background: radial-gradient(ellipse at top left, rgba(84,77,162,1) 40%, rgba(84,77,162,0.2) 100%);
+    color: #FFFFFF;
+    display: block;
+}
+
+#intro {
+    max-width: 950px;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    margin-right: 400px; /* same as left position - for responsivness */
+}
+
+#intro p {
+    font-size: 1.5em;
+    opacity: 0.7;
+    line-height: 1.5em;
+}
+
+#start-actions button {
+    margin: 5em 4em 0 0;
+    padding: 1em;
+    font-size: 1em;
+    color: #FFFFFF;
+    background-color: transparent;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+#start-actions button.ghost {
+    border: 2px solid #fff;
+}
+
+#start-actions button:hover {
+    background-color: #fff; /* fallback */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #fff; /* fallback */
+    border-color: rgba(255, 255, 255, 0.7);
+    transition: background-color 0.1s ease-in,
+    border-color 0.1s ease-in;
+}
+
+#secondary-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#secondary-menu button {
+    color: #FFFFFF;
+    background-color: transparent;
+    border: none;
+    padding: 2em 4em 2em 0;
+    cursor: pointer;
+}
+
+#secondary-menu button:hover {
+    text-decoration: underline;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(84,77,162,1);
+    z-index: -1;
+}
+
+/* remove vertical scroll bar */
+#particles-js canvas {
+    position: absolute;
+}
+
+
+@media only screen and (max-width: 1400px), only screen and (max-height: 800px) {
+    #landing {
+        background: radial-gradient(ellipse at top left, rgba(84,77,162,1) 45%, rgba(84,77,162,0.2) 100%);
+    }
+    #intro h1 {
+        font-size: 2.5em;
+    }
+    #intro p {
+        font-size: 1.3em;
+    }
+}
+@media only screen and (max-width: 1000px), only screen and (max-height: 650px) {
+    /*#landing {
+        background: radial-gradient(ellipse at top left, rgba(84,77,162,1) 600px, rgba(84,77,162,0.2) 100%);
+    }*/
+    #intro {
+        top: 12%;
+        left: 8%;
+        margin-right: 400px;
+    }
+    #intro h1 {
+        font-size: 2.0em;
+        margin-bottom: 0.7em;
+    }
+    #intro p {
+        font-size: 1.1em;
+        line-height: 1.4em;
+    }
+    .start-actions {
+        margin: 2em 2em 0 0;
+    }
+}
+
+
+
+
+/* =========================================================================== Analysis */
+
+.top-stripe {
+    height: 10px;
+    background-color: rgba(84,77,162,1);
+}
+
+#analysis h1 {
+    font-size: 40px;
+    font-weight: 400;
+    margin: 100px auto 25px auto;
+    width: fit-content;
+    text-align: center;
+}
+
+#analysis h2 {
+    font-size: 2em;
+    font-weight: 400;
+    opacity: 0.8;
+    margin: 100px auto 18px auto;
+    width: fit-content;
+    text-align: center;
+    border-bottom: #ffae00 solid 4px;
+    padding: 0 10px 18px 2px;
+}
+
+.instructions {
+    margin: 0 auto 80px auto;
+    width: 600px;
+}
+
+.instructions p {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    float: left;
+    color: #999999;
+    transition: color 0.1s ease-out;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 28px 0 0 38px;
+}
+
+.back-button span {
+    padding-left: 10px;
+}
+
+.back-button i {
+    border: solid #999999;
+    border-width: 0 3px 3px 0;
+    width: 10px;
+    height: 10px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.back-button:hover span,
+.back-button:active span {
+    color: #000000;
+    transition: color 0.1s ease-in;
+}
+
+.back-button:hover i,
+.back-button:active i {
+    border-color: #000000;
+    transition: border-color 0.1s ease-in;
+}
+
+.center-container {
+    margin: auto;
+    width: fit-content;
+}
+
+
+
+/* ==================================================================== Dataset section */
+
+#dataset-section {
+    display: flex;
+}
+
+#user-data {
+    width: 550px;
+    margin-right: 40px;
+}
+#user-data fieldset {
+    border: none;
+}
+
+#preprocessed-data {
+    width: 325px;
+}
+
+i.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.demo-dataset-group {
+    display: none;
+    padding-left: 30px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.demo-dataset-group-title {
+    padding-left: 24px;
+    cursor: pointer;
+}
+
+.demo-dataset-group-title span {
+    padding-left: 10px;
+    vertical-align: middle;
+}
+
+.inputfile {
+    /*width: 0.1px;*/
+    /*height: 0.1px;*/
+    opacity: 0;
+    /*overflow: hidden;*/
+    position: absolute;
+    /*z-index: -1;*/
+}
+
+.inputfile + label {
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #444444;
+    background-color: #f9f9fd;
+    border: #cccccc dashed 2px;
+    border-radius: 12px;
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 20px 0 0;
+    width: 180px;
+    cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #f5f5f9;
+}
+
+#add-upload-field {
+    font-size: 14px;
+    color: #999999;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 14px 0 6px 0;
+    transition: color 50ms linear;
+}
+
+#add-upload-field:hover {
+    color: #000000;
+    transition: color 50ms linear;
+}
+
+#add-upload-field span:nth-child(1) {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#add-upload-field span:nth-child(2) {
+    vertical-align: text-top;
+}
+
+fieldset {
+    border-radius: 12px;
+    border: #e1e1e1 solid 2px;
+}
+
+fieldset legend {
+    padding: 18px;
+}
+
+/* remove dataset X */
+.remove-upload-field {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 10px;
+    position: relative;
+}
+.remove-upload-field:before,
+.remove-upload-field:after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 3px;
+    background-color: #d4d4d5;
+    border-radius: 2px;
+    transition: background-color 50ms linear;
+}
+.remove-upload-field:hover:before,
+.remove-upload-field:hover:after {
+    background-color: #999999;
+    transition: background-color 50ms linear;
+}
+.remove-upload-field:before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    left: 0;
+}
+.remove-upload-field:after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    left: 0;
+}
+#placeholder-remove-dataset {
+    width: 22px;
+}
+
+.dataset-description {
+    padding: 0 0 20px 47px;
+    font-size: 13px;
+}
+
+#modal-formatting table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+#modal-formatting table td {
+    padding: 2px 24px 2px 10px;
+    border: #999999 solid 1px;
+}
+
+#modal-formatting .table-header {
+    font-weight: 600;
+}
+
+#modal-formatting .table-fading-container {
+    width: fit-content;
+    position: relative;
+}
+
+#modal-formatting .table-fading {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 1) 95%),
+                linear-gradient(to right, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 1) 95%);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#example-files {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+/* ============================================================= Stratification section */
+
+#risk-group-type-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto 50px auto;
+    width: 600px;
+    text-align: center;
+}
+
+#stratification-section {
+    display: flex;
+    justify-content: center;
+}
+
+.scroll-wrapper,
+#differentiation-markers-wrapper,
+#risk-group-type-container {
+    display: none;
+}
+
+#differentiation-markers-wrapper {
+    width: 420px;
+}
+
+#select-stratifications {
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.scroll-wrapper {
+    width: 800px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+#differentiation-markers {
+    display: flex;
+    justify-content: center;
+}
+
+#differentiation-markers textarea {
+    font-size: 14px;
+    line-height: 18px;
+    color: #727272;
+    /*height: -webkit-fill-available;*/
+    width: 120px;
+    margin-left: 20px;
+    border: #b3b3b3 solid 1px;
+    overflow: auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    height: 250px;
+}
+
+#differentiation-markers label {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    padding: 6px 0 2px 18px;
+}
+
+#differentiation-markers textarea::-webkit-input-placeholder {
+    color: #d0d0d0;
+}
+#differentiation-markers textarea:-moz-placeholder { /* Firefox 18- */
+    color: #d0d0d0;
+}
+#differentiation-markers textarea::-moz-placeholder {  /* Firefox 19+ */
+    color: #d0d0d0;
+}
+#differentiation-markers textarea:-ms-input-placeholder {
+    color: #d0d0d0;
+}
+
+/* ============================================================= Filter heatmap section */
+
+#heatmap-section {
+    position: relative;
+    min-height: 100px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+#filter-heatmap img {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    padding-left: 30px;
+}
+
+.loading-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    visibility: hidden;
+}
+
+#heatmap-loader {
+    content: url("../_img/spinner.gif");
+    width: 100px;
+    height: 100px;
+}
+
+
+
+/* =========================================================================== Settings */
+
+#settings-section {
+    width: fit-content;
+    margin: 0 auto 0 auto;
+}
+
+#cox-options {
+    display: none;
+}
+
+.stratification-row {
+    display: flex;
+    margin-top: 10px;
+}
+
+.stratification-row p {
+    width: 150px;
+    padding-right: 10px;
+    margin: 0;
+    text-align: right;
+    line-height: 42px;
+}
+
+.stratification-row select {
+    width: 200px;
+}
+
+
+/* ===================================================================== Submit section */
+
+#submit-section {
+    padding-bottom: 50px;
+}
+
+#analysis-summary {
+    background-color: #f9f9fd;
+    border: #f0f0f5 solid 2px;
+    border-radius: 12px;
+    padding: 30px;
+    width: fit-content;
+    margin: 0 auto 100px auto;
+}
+
+#analysis-summary .row {
+    display: flex;
+}
+
+#analysis-summary .row > div {
+
+    padding: 0 10px 10px 10px;
+}
+
+#analysis-summary div.row div:first-child {
+    width: 225px;
+}
+
+.center-button {
+    width: 400px;
+    margin: 0 auto 0 auto;
+}
+
+button[type="submit"] {
+    width: 400px;
+    background-color: rgba(84,77,162,1);
+    border: none;
+    color: #ffffff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    background-color: rgba(84, 77, 162, 0.84);
+}
+
+#progress-bar {
+    position: relative;
+    width: 400px;
+    background-color: rgba(84,77,162,1);
+    border-radius: 4px;
+    margin: 0 auto 0 auto;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#progress-bar:hover {
+    background-color: rgba(84, 77, 162, 0.84);
+}
+
+#progress-fill {
+    width: 0;
+    height: 38px;
+    background-color: rgba(84,77,162,0.8);
+    border-radius: 4px 0 0 4px;
+}
+
+#progress-text { /* hack to center text */
+    width: fit-content;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 7px;
+}
+
+
+/* ===================================================================== Result section */
+
+#result-section {
+    background-color: #f9f9fd;
+    display: none;
+}
+
+#result-section h1 {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 30px;
+    margin: 0;
+}
+
+#result-section h2 {
+    border-bottom: none;
+    font-size: 26px;
+    padding: 0;
+    margin: 0;
+}
+
+#score-container,
+#enrichment-container {
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+.columns {
+    display: flex;
+}
+
+#score-container {
+    background-color: #f9f9fd;
+}
+
+#enrichment-container {
+    background-color: rgba(84, 77, 162, 0.03);
+}
+
+#score-container .information {
+    width: 350px;
+    padding: 0 0 0 60px;
+}
+
+#enrichment-container .information {
+    width: 320px;
+    padding: 0 60px 0 0;
+}
+
+table#result-table,
+table#enrichment-table {
+    width: auto !important;
+    border-collapse: collapse;
+}
+
+#result-table td,
+#enrichment-table td {
+    padding: 6px 20px !important;
+}
+
+table.highlight tbody tr:hover {
+    background-color: rgba(84, 77, 162, 0.05) !important;
+}
+
+.table-box {
+    border-radius: 22px;
+    border: 2px solid rgba(84, 77, 162, 0.2);
+    padding: 6px 22px 16px 22px;
+    width: fit-content;
+}
+
+.hidden-plot {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: 100;
+    position: absolute;
+    left: 100px;
+    top: -70px;
+    padding: 10px;
+}
+
+.view-plot:hover .hidden-plot {
+    opacity: 1;
+    height: auto;
+}
+
+.view-plot td {
+    position: relative;
+}
+
+
+/* ============================================================================== Modals*/
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 8% auto; /* 15% from the top and centered */
+    padding: 20px 40px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 70%; /* Could be more or less, depending on screen size */
+    min-width: 600px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h1 {
+    font-size: 28px;
+}
+
+
+/* ===================================================================== Bootstrap tour */
+
+#start-tour {
+    float: right;
+
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+
+
+/* ================================================================ Errors and Warnings */
+
+.input-error,
+.filter-error {
+    display: none;
+    padding: 10px 15px;
+    background-color: #fff6f6;
+    color: #9f3a38;
+    border: 1px solid #9f3a38;
+    border-radius: 4px;
+}
+
+.input-error p,
+.filter-error p {
+    margin: 0;
+    font-weight: 600;
+}
+
+
