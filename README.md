@@ -2,10 +2,118 @@
 
 Prerequisites
 
-  -Download the following RData files and put in the /r_scripts directory
+  -Download the following RData files and put in the /r_scripts directory.
    
     http://targettranslator.org/r_scripts/L1000_drugs_genes.RData
     http://targettranslator.org/r_scripts/L1000_drugs_multinom.RData
     http://targettranslator.org/r_scripts/L1000_drugs_reduced.RData
     http://targettranslator.org/r_scripts/L1000_shRNA_reduced.RData
     http://targettranslator.org/r_scripts/stitch.RData
+
+Optional
+  -The following precompiled datasets can be added to the /data directory.
+    http://targettranslator.org/data/ACC_PanCan_clinical.json
+    http://targettranslator.org/data/ACC_PanCan_clinical.tsv
+    http://targettranslator.org/data/ACC_PanCan_expression.tsv
+    http://targettranslator.org/data/BLCA_PanCan_clinical.json
+    http://targettranslator.org/data/BLCA_PanCan_clinical.tsv
+    http://targettranslator.org/data/BLCA_PanCan_expression.tsv
+    http://targettranslator.org/data/BRCA_PanCan_clinical.json
+    http://targettranslator.org/data/BRCA_PanCan_clinical.tsv
+    http://targettranslator.org/data/BRCA_PanCan_expression.tsv
+    http://targettranslator.org/data/CESC_PanCan_clinical.json
+    http://targettranslator.org/data/CESC_PanCan_clinical.tsv
+    http://targettranslator.org/data/CESC_PanCan_expression.tsv
+    http://targettranslator.org/data/CHOL_PanCan_clinical.json
+    http://targettranslator.org/data/CHOL_PanCan_clinical.tsv
+    http://targettranslator.org/data/CHOL_PanCan_expression.tsv
+    http://targettranslator.org/data/COAD_PanCan_clinical.json
+    http://targettranslator.org/data/COAD_PanCan_clinical.tsv
+    http://targettranslator.org/data/COAD_PanCan_expression.tsv
+    http://targettranslator.org/data/DLBC_PanCan_clinical.json
+    http://targettranslator.org/data/DLBC_PanCan_clinical.tsv
+    http://targettranslator.org/data/DLBC_PanCan_expression.tsv
+    http://targettranslator.org/data/ESCA_PanCan_clinical.json
+    http://targettranslator.org/data/ESCA_PanCan_clinical.tsv
+    http://targettranslator.org/data/ESCA_PanCan_expression.tsv
+    http://targettranslator.org/data/GBM_PanCan_clinical.json
+    http://targettranslator.org/data/GBM_PanCan_clinical.tsv
+    http://targettranslator.org/data/GBM_PanCan_expression.tsv
+    http://targettranslator.org/data/HNSC_PanCan_clinical.json
+    http://targettranslator.org/data/HNSC_PanCan_clinical.tsv
+    http://targettranslator.org/data/HNSC_PanCan_expression.tsv
+    http://targettranslator.org/data/KICH_PanCan_clinical.json
+    http://targettranslator.org/data/KICH_PanCan_clinical.tsv
+    http://targettranslator.org/data/KICH_PanCan_expression.tsv
+    http://targettranslator.org/data/KIRC_PanCan_clinical.json
+    http://targettranslator.org/data/KIRC_PanCan_clinical.tsv
+    http://targettranslator.org/data/KIRC_PanCan_expression.tsv
+    http://targettranslator.org/data/KIRP_PanCan_clinical.json
+    http://targettranslator.org/data/KIRP_PanCan_clinical.tsv
+    http://targettranslator.org/data/KIRP_PanCan_expression.tsv
+    http://targettranslator.org/data/LAML_PanCan_clinical.json
+    http://targettranslator.org/data/LAML_PanCan_clinical.tsv
+    http://targettranslator.org/data/LAML_PanCan_expression.tsv
+    http://targettranslator.org/data/LGG_PanCan_clinical.json
+    http://targettranslator.org/data/LGG_PanCan_clinical.tsv
+    http://targettranslator.org/data/LGG_PanCan_expression.tsv
+    http://targettranslator.org/data/LIHC_PanCan_clinical.json
+    http://targettranslator.org/data/LIHC_PanCan_clinical.tsv
+    http://targettranslator.org/data/LIHC_PanCan_expression.tsv
+    http://targettranslator.org/data/LUAD_PanCan_clinical.json
+    http://targettranslator.org/data/LUAD_PanCan_clinical.tsv
+    http://targettranslator.org/data/LUAD_PanCan_expression.tsv
+    http://targettranslator.org/data/LUSC_PanCan_clinical.json
+    http://targettranslator.org/data/LUSC_PanCan_clinical.tsv
+    http://targettranslator.org/data/LUSC_PanCan_expression.tsv
+    http://targettranslator.org/data/MESO_PanCan_clinical.json
+    http://targettranslator.org/data/MESO_PanCan_clinical.tsv
+    http://targettranslator.org/data/MESO_PanCan_expression.tsv
+    http://targettranslator.org/data/OV_PanCan_clinical.json
+    http://targettranslator.org/data/OV_PanCan_clinical.tsv
+    http://targettranslator.org/data/OV_PanCan_expression.tsv
+    http://targettranslator.org/data/PAAD_PanCan_clinical.json
+    http://targettranslator.org/data/PAAD_PanCan_clinical.tsv
+    http://targettranslator.org/data/PAAD_PanCan_expression.tsv
+    http://targettranslator.org/data/PCPG_PanCan_clinical.json
+    http://targettranslator.org/data/PCPG_PanCan_clinical.tsv
+    http://targettranslator.org/data/PCPG_PanCan_expression.tsv
+    http://targettranslator.org/data/PRAD_PanCan_clinical.json
+    http://targettranslator.org/data/PRAD_PanCan_clinical.tsv
+    http://targettranslator.org/data/PRAD_PanCan_expression.tsv
+    http://targettranslator.org/data/r2_clinical.json
+    http://targettranslator.org/data/r2_clinical.tsv
+    http://targettranslator.org/data/r2_expression.tsv
+    http://targettranslator.org/data/READ_PanCan_clinical.json
+    http://targettranslator.org/data/READ_PanCan_clinical.tsv
+    http://targettranslator.org/data/READ_PanCan_expression.tsv
+    http://targettranslator.org/data/SARC_PanCan_clinical.json
+    http://targettranslator.org/data/SARC_PanCan_clinical.tsv
+    http://targettranslator.org/data/SARC_PanCan_expression.tsv
+    http://targettranslator.org/data/SKCM_PanCan_clinical.json
+    http://targettranslator.org/data/SKCM_PanCan_clinical.tsv
+    http://targettranslator.org/data/SKCM_PanCan_expression.tsv
+    http://targettranslator.org/data/STAD_PanCan_clinical.json
+    http://targettranslator.org/data/STAD_PanCan_clinical.tsv
+    http://targettranslator.org/data/STAD_PanCan_expression.tsv
+    http://targettranslator.org/data/target_clinical.json
+    http://targettranslator.org/data/target_clinical.tsv
+    http://targettranslator.org/data/target_expression.tsv
+    http://targettranslator.org/data/TGCT_PanCan_clinical.json
+    http://targettranslator.org/data/TGCT_PanCan_clinical.tsv
+    http://targettranslator.org/data/TGCT_PanCan_expression.tsv
+    http://targettranslator.org/data/THCA_PanCan_clinical.json
+    http://targettranslator.org/data/THCA_PanCan_clinical.tsv
+    http://targettranslator.org/data/THCA_PanCan_expression.tsv
+    http://targettranslator.org/data/THYM_PanCan_clinical.json
+    http://targettranslator.org/data/THYM_PanCan_clinical.tsv
+    http://targettranslator.org/data/THYM_PanCan_expression.tsv
+    http://targettranslator.org/data/UCEC_PanCan_clinical.json
+    http://targettranslator.org/data/UCEC_PanCan_clinical.tsv
+    http://targettranslator.org/data/UCEC_PanCan_expression.tsv
+    http://targettranslator.org/data/UCS_PanCan_clinical.json
+    http://targettranslator.org/data/UCS_PanCan_clinical.tsv
+    http://targettranslator.org/data/UCS_PanCan_expression.tsv
+    http://targettranslator.org/data/UVM_PanCan_clinical.json
+    http://targettranslator.org/data/UVM_PanCan_clinical.tsv
+    http://targettranslator.org/data/UVM_PanCan_expression.tsv
