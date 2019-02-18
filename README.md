@@ -13,7 +13,7 @@ Prerequisites
 
 Optional
 
-  -The following precompiled datasets can be added to the /data directory.
+  -The following precompiled datasets can be downloaded and added to the /data directory.
   
     http://targettranslator.org/data/ACC_PanCan_clinical.json
     http://targettranslator.org/data/ACC_PanCan_clinical.tsv
