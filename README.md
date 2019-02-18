@@ -11,7 +11,9 @@ Prerequisites
     http://targettranslator.org/r_scripts/stitch.RData
 
 Optional
+
   -The following precompiled datasets can be added to the /data directory.
+  
     http://targettranslator.org/data/ACC_PanCan_clinical.json
     http://targettranslator.org/data/ACC_PanCan_clinical.tsv
     http://targettranslator.org/data/ACC_PanCan_expression.tsv
