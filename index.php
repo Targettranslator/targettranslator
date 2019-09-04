@@ -143,6 +143,20 @@
                                 </div>
 
                                 <div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="demo-dataset" name="use_SEQC" id="use-SEQC" />
+                                        <label for="use-SEQC">SEQC (Neuroblastoma)</label>
+                                    </div>
+                                    <div class="dataset-description">
+                                        <span>#Patients: 498</span>
+                                        <br>
+                                        <a target="_blank" rel="noopener noreferrer" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE49711">Go to source.</a>
+                                        <br>
+                                        <a href="/targettranslator/data/SEQC_data.zip" download>Download processed data</a>
+                                    </div>
+                                </div>
+
+                                <div>
                                     <div class="demo-dataset-group-title">
                                         <i class="arrow down"></i>
                                         <span>TCGA, Pan-Cancer</span>
@@ -189,45 +203,6 @@
                                 <?php } ?>
 
                                 </div>
-                   <!-- $mediums = get_growth_mediums();
-                    $patient_mediums = array();
-                    while ($row = fetch_array($patient_sample_cultures)) {
-                        $patient_mediums[$row['medium_name']] = $row['passage'];
-                    }
-
-                    while ($row = fetch_array($mediums)) {
-                        $medium_id = $row['growth_medium_id'];
-                        $medium_name = $row['name'];
-                        ?>
-
-                                <div class="form-row">
-
-                                    <div class="input-field width-150">
-                                        <input type="checkbox"
-                                               class="filled-in has-value"
-                                               id="add-culture-medium-<?php /*echo $medium_id; */?>"
-                                               name="culture_medium"
-                                               value="<?php /*echo $medium_id; */?>"
-                                            <?php /*if(array_key_exists($medium_name, $patient_mediums)) {echo "checked";} */?>
-                                               onclick="ShowHideFormOptions(this)"
-                                        />
-                                        <label for="add-culture-medium-<?php /*echo $medium_id; */?>"><?php /*echo $medium_name; */?></label>
-                                        <div class="input-error"></div>
-                                    </div>
-
-                                    <div class="input-field width-140 transparent-content">
-                                        <input type="number"
-                                               id="add-culture-passage-<?php /*echo $medium_id; */?>"
-                                               name="culture_passage"
-                                               value="<?php /*if(array_key_exists($medium_name, $patient_mediums)) {echo $patient_mediums[$medium_name];} else {echo "";} */?>"
-                                        />
-                                        <label for="add-culture-passage-<?php /*echo $medium_id; */?>">Highest passage</label>
-                                        <div class="input-error"></div>
-                                    </div>
-
-                                </div>
-                                --><?php /*} */?>
-
 
                             </fieldset>
                         </div>
