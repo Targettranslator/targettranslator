@@ -93,6 +93,9 @@ Optional
     http://targettranslator.org/data/SARC_PanCan_clinical.json
     http://targettranslator.org/data/SARC_PanCan_clinical.tsv
     http://targettranslator.org/data/SARC_PanCan_expression.tsv
+    http://targettranslator.org/data/SEQC_clinical.json
+    http://targettranslator.org/data/SEQC_clinical.tsv
+    http://targettranslator.org/data/SEQC_expression.tsv
     http://targettranslator.org/data/SKCM_PanCan_clinical.json
     http://targettranslator.org/data/SKCM_PanCan_clinical.tsv
     http://targettranslator.org/data/SKCM_PanCan_expression.tsv
