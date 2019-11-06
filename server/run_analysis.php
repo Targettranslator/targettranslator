@@ -2,7 +2,7 @@
 // change max time from 300s (5 min) to 1000s (17 min)
 ini_set('MAX_EXECUTION_TIME', 1000);
 
-error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: \n", 3, $_SERVER['DOCUMENT_ROOT']."/targettranslator/php.log");
+error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: \n", 3, $_SERVER['DOCUMENT_ROOT']."/php.log");
 
 /**
  * Assemble result into an associative array and echo it
@@ -366,7 +366,7 @@ $command =
     "\"" . $job_id . "\" " .
     "\"../data/job_" . $job_id . "/markers_$unique_ids[0].tsv\" ";
 
-error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: $command \n", 3, $_SERVER['DOCUMENT_ROOT']."/targettranslator/php.log");
+error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: $command \n", 3, $_SERVER['DOCUMENT_ROOT']."/php.log");
 // execute command
 // output in the terminal is stored in $output
 // $status contain possible error codes, 0 if none
@@ -391,6 +391,6 @@ if ($data[0] == "error") {
 // remove job folder
 removeData($job_id);
 
-error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: \n", 3, $_SERVER['DOCUMENT_ROOT']."/targettranslator/php.log");
+error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: \n", 3, $_SERVER['DOCUMENT_ROOT']."/php.log");
 
 return;
