@@ -194,13 +194,13 @@ $command =
 // $status contain possible error codes, 0 if none
 exec($command, $output, $status);
 
-error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: $command \n", 3, $_SERVER['DOCUMENT_ROOT']."/targettranslator/php.log");
+error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: $command \n", 3, $_SERVER['DOCUMENT_ROOT']."/php.log");
 
 // ================================================================= return a response ===
 
 // Check if there are errors from the R-script, else return the results
 $data = json_decode($output[0], true);
-error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: " . print_r($output, true). " \n", 3, $_SERVER['DOCUMENT_ROOT']."/targettranslator/php.log");
+error_log(date('Y-m-d h:i:s a', time()) . "    [analyze.php]: " . print_r($output, true). " \n", 3, $_SERVER['DOCUMENT_ROOT']."/php.log");
 if ($data[0] == "error") {
     echoResult(FALSE, NULL, $data, NULL, NULL);
 } else {
