@@ -6,19 +6,19 @@
     <title>Target Translator</title>
 
     <!-- favicon -->
-     <link rel="shortcut icon" type="image/png" href="/targettranslator/_img/favicon.ico" />
+     <link rel="shortcut icon" type="image/png" href="/_img/favicon.ico" />
 
     <!-- Open Sans -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" >
 
     <!-- CSS Reset Normalize -->
-    <link rel="stylesheet" href="/targettranslator/_css/normalize.css" type="text/css"  media="screen,projection" />
+    <link rel="stylesheet" href="/_css/normalize.css" type="text/css"  media="screen,projection" />
 
     <!-- Bootstrap tour -->
-    <link rel="stylesheet" href="/targettranslator/_plugins/bootstrap-tour/bootstrap-tour-standalone.min.css" type="text/css"  media="screen,projection" />
+    <link rel="stylesheet" href="/_plugins/bootstrap-tour/bootstrap-tour-standalone.min.css" type="text/css"  media="screen,projection" />
 
     <!-- CSS Custom -->
-    <link rel="stylesheet" href="/targettranslator/_css/style.css" type="text/css"  media="screen,projection" />
+    <link rel="stylesheet" href="/_css/style.css" type="text/css"  media="screen,projection" />
 
 </head>
 <body>
@@ -37,7 +37,7 @@
 <!--                <button>Contact</button>-->
             </div>
 
-            <h1>Target Translator <sup> BETA</sup> </h1>
+            <h1>TargetTranslator <sup> BETA</sup> </h1>
 
             <p>
                 You have reached the TargetTranslator, an interactive tool that enables the creation
@@ -124,7 +124,7 @@
                                         <br>
                                         <a target="_blank" rel="noopener noreferrer" href="https://www.nature.com/articles/nature10910">Go to source</a>
                                         <br>
-                                        <a href="/targettranslator/data/r2_data.zip" download>Download processed data</a>
+                                        <a href="/data/r2_data.zip" download>Download processed data</a>
                                     </div>
                                 </div>
 
@@ -138,10 +138,9 @@
                                         <br>
                                         <a target="_blank" rel="noopener noreferrer" href="https://ocg.cancer.gov/programs/target">Go to source.</a>
                                         <br>
-                                        <a href="/targettranslator/data/target_data.zip" download>Download processed data</a>
+                                        <a href="/data/target_data.zip" download>Download processed data</a>
                                     </div>
                                 </div>
-
                                 <div>
                                     <div class="checkbox">
                                         <input type="checkbox" class="demo-dataset" name="use_SEQC" id="use-SEQC" />
@@ -155,7 +154,6 @@
                                         <a href="/targettranslator/data/SEQC_data.zip" download>Download processed data</a>
                                     </div>
                                 </div>
-
                                 <div>
                                     <div class="demo-dataset-group-title">
                                         <i class="arrow down"></i>
@@ -169,21 +167,17 @@
 
                                 <div class="demo-dataset-group">
                                 <?php
-
                                 // get information about all pancan datasets
                                 $file_handle = fopen("data/pancan_info.csv","r");
                                 while (!feof($file_handle) ) {
                                     $pancan_metadata[] = fgetcsv($file_handle);
                                 }
                                 fclose($file_handle);
-
                                 // print all pancan datasets, skip title row
                                 foreach(array_slice($pancan_metadata, 1) as $row) {
-
                                     $cancer_abbr = $row[0];
                                     $cancer_type = $row[1];
                                     $num_patients = $row[2];
-
                                     ?>
 
                                     <div>
@@ -196,13 +190,47 @@
                                             <br>
                                             <span>#Patients: <?php echo $num_patients; ?></span>
                                             <br>
-                                            <a href="/targettranslator/data/<?php echo $cancer_abbr; ?>_Pan-Can_data.zip" download>Download processed data</a>
+                                            <a href="/data/<?php echo $cancer_abbr; ?>_Pan-Can_data.zip" download>Download processed data</a>
                                         </div>
                                     </div>
 
                                 <?php } ?>
 
                                 </div>
+                   <!-- $mediums = get_growth_mediums();
+                    $patient_mediums = array();
+                    while ($row = fetch_array($patient_sample_cultures)) {
+                        $patient_mediums[$row['medium_name']] = $row['passage'];
+                    }
+                    while ($row = fetch_array($mediums)) {
+                        $medium_id = $row['growth_medium_id'];
+                        $medium_name = $row['name'];
+                        ?>
+                                <div class="form-row">
+                                    <div class="input-field width-150">
+                                        <input type="checkbox"
+                                               class="filled-in has-value"
+                                               id="add-culture-medium-<?php /*echo $medium_id; */?>"
+                                               name="culture_medium"
+                                               value="<?php /*echo $medium_id; */?>"
+                                            <?php /*if(array_key_exists($medium_name, $patient_mediums)) {echo "checked";} */?>
+                                               onclick="ShowHideFormOptions(this)"
+                                        />
+                                        <label for="add-culture-medium-<?php /*echo $medium_id; */?>"><?php /*echo $medium_name; */?></label>
+                                        <div class="input-error"></div>
+                                    </div>
+                                    <div class="input-field width-140 transparent-content">
+                                        <input type="number"
+                                               id="add-culture-passage-<?php /*echo $medium_id; */?>"
+                                               name="culture_passage"
+                                               value="<?php /*if(array_key_exists($medium_name, $patient_mediums)) {echo $patient_mediums[$medium_name];} else {echo "";} */?>"
+                                        />
+                                        <label for="add-culture-passage-<?php /*echo $medium_id; */?>">Highest passage</label>
+                                        <div class="input-error"></div>
+                                    </div>
+                                </div>
+                                --><?php /*} */?>
+
 
                             </fieldset>
                         </div>
@@ -293,7 +321,7 @@
                         <p>Is survival time a part of your definition of a risk group? Then it might
                             be a good idea to take censoring effects into consideration. To do that,
                             check the checkbox below and specify where to find the survival time
-                            and the censoring variable in you dataset. <!--What is really happening behind
+                            and the censoring variable in your dataset. <!--What is really happening behind
                             the scene here? Read the <a href="#">documentation</a> and find out.-->
                     </div>
 
@@ -330,7 +358,7 @@
                         <h2>4. All is set, time for analysis </h2>
 
                         <div class="instructions">
-                            <p>This is you configuration. Read through to make sure it is correct.</p>
+                            <p>This is your configuration. Read through it to make sure it is correct.</p>
                         </div>
 
                         <div id="analysis-summary">
@@ -834,19 +862,19 @@
 
 
 <!-- JQuery -->
-<script src="/targettranslator/_plugins/jquery-3.3.1.min.js"></script>
+<script src="/_plugins/jquery-3.3.1.min.js"></script>
 
 <!-- Particles -->
-<script src="/targettranslator/_plugins/particles/particles.min.js"></script>
+<script src="/_plugins/particles/particles.min.js"></script>
 
 <!-- PapaParse -->
-<script src="/targettranslator/_plugins/papaparse/papaparse.min.js"></script>
+<script src="/_plugins/papaparse/papaparse.min.js"></script>
 
 <!-- Bootstrap tour -->
-<script src="/targettranslator/_plugins/bootstrap-tour/bootstrap-tour-standalone.min.js"></script>
+<script src="/_plugins/bootstrap-tour/bootstrap-tour-standalone.min.js"></script>
 
 <!-- JavaScript Custom -->
-<script src="/targettranslator/_js/script.js"></script>
+<script src="/_js/script.js"></script>
 
 
 
