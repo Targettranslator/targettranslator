@@ -1,59 +1,17 @@
-
 tryCatch({
-	#stop("funkar")
+	
 
 require(jsonlite)
 require(base64enc)
 require(tictoc)
 require(data.table)
-require(MASS) # Linear discriminant function analysis
-# tic("--------------------")
+require(MASS)
 	
-in.development <- 0
 
 # --------------------------------------------------------------------------------------------- Load packages ---
 # ---------------------------------------------------------------------------------------------------------------
 
 	
-	if (in.development) {
-		setwd("C:\\xampp\\htdocs\\targetTranslator\\r_scripts\\")
-		paths.expression <- c("C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\R2\\r2_expression.tsv", 
-													"C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\TARGET\\target_expression.tsv")
-		paths.clinical   <- c("C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\R2\\r2_clinical.tsv",
-													"C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\TARGET\\target_clinical.tsv")
-		path.conversions <- "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\R2\\r2_stratifications.tsv"
-		path.settings    <- "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\R2\\r2_settings.tsv"
-		path.signature   <- "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\R2\\signature.tsv"
-		path.signature   <- "C:\\xampp\\htdocs\\targetTranslator\\data\\markers_5c0e33fa6d636.tsv"
-		
-		paths.expression <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c0e40e4ee5da\\expression_5c0e40e4eec1e.tsv"
-		paths.clinical   <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c0e40e4ee5da\\clinical_5c0e40e4eec1e.tsv"
-		path.conversions <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c0e40e4ee5da\\stratifications_5c0e40e4eec1e.tsv"
-		path.settings    <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c0e40e4ee5da\\settings_5c0e40e4eec1e.tsv"
-		job.id           <- "5c0e40e4ee5da"
-		path.signature   <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c0e40e4ee5da\\markers_5c0e40e4eec1e.tsv"
-		
-		paths.expression <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c4196de181b7\\expression_5c4196de18714.tsv"
-		paths.clinical   <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c4196de181b7\\clinical_5c4196de18714.tsv"
-		path.conversions <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c4196de181b7\\stratifications_5c4196de18714.tsv"
-		path.settings    <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c4196de181b7\\settings_5c4196de18714.tsv"
-		job.id           <- "5c4196de181b7"
-		path.signature   <- "C:\\xampp\\htdocs\\targetTranslator\\data\\job_5c4196de181b7\\markers_5c4196de18714.tsv"
-		
-		library(tictoc)
-		source("C:\\_Caroline\\Projects\\targetTranslator\\development\\Code\\importL1000Matlab.R")
-		source("C:\\_Caroline\\Projects\\targetTranslator\\development\\Code\\calculateWeights.R")
-		source("C:\\_Caroline\\Projects\\targetTranslator\\development\\Code\\importPriors.R")
-		
-		# create .Rdata objects for the L1000 dataset
-		importL1000Matlab("C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\exported_from_Svens_code\\L1000_shRNA_cleaned.mat", 
-											"C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\L1000\\L1000_shRNA.RData")
-		importL1000Matlab("C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\exported_from_Svens_code\\L1000_drugs_cleaned.mat", 
-											"C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\L1000\\L1000_drugs.RData")
-	}
-
-	
-
 	# get parameters
 	tic("get parameters      ")
 	args <- commandArgs(TRUE)
@@ -148,17 +106,8 @@ in.development <- 0
 	
 	# load L1000 stability values
 	tic("load stability vals ")
-	# TODO: are they specific for a certain dataset?
-	if (in.development) {
-		# use only drugs dataset for this
-		multinom <- calculateWeights(L1000)
-		#save(multinom, file = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\L1000\\L1000_shRNA_multinom.RData")
-		save(multinom, file = "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\L1000\\L1000_drugs_multinom.RData")
-	} else {
-		load("L1000_drugs_multinom.RData")
-	}
-	
-	# TODO: these can belong to the original L1000 object
+	load("L1000_drugs_multinom.RData")
+		
 	L1000$probabilities <- multinom$probabilities
 	L1000$coefficients <- multinom$coefficients
 	toc(log = TRUE, quiet = TRUE)
@@ -194,7 +143,6 @@ in.development <- 0
 
 	# create results table
 	tic("create results table")
-	# TODO: combine result and output it
 	result.table <- createResultTable(scores, fdr)
 	
 	if (identical(L1000.type, "drug")) {
@@ -203,15 +151,14 @@ in.development <- 0
 		# replace the text "MINUS" with - and .... with space
 		result.table$perturbation <- gsub('MINUS', '-', result.table$perturbation)
 		result.table$perturbation <- gsub('....', ' ', result.table$perturbation, fixed = TRUE)
+		result.table$perturbation <- gsub('PLUS', '+', result.table$perturbation)
+		result.table$perturbation <- gsub('COMMA', ',', result.table$perturbation)
 		
-		# add concentration unit
-		# the micro symbol makes everything crash, maybe some encoding issue, replave with u instead
-		result.table$perturbation <- paste(result.table$perturbation, "uM", sep = "")
-		
-		# add what type of perturbation it is as the column name
-		# if one does this it has to be fixed in the javascript to when printing the table
-		#colnames(result.table)[which(names(result.table) == "Perturbation")] <- "Drug"
-
+		# replace the text "MINUS" with - and remove everything after .... in the row names
+		row.names(scores) <- gsub('MINUS', '-', row.names(scores))
+		row.names(scores) <- gsub("\\..*", '', row.names(scores))
+		result.table$perturbation <- gsub('PLUS', '+', result.table$perturbation)
+		result.table$perturbation <- gsub('COMMA', ',', result.table$perturbation)
 	}
 	
 	if (identical(L1000.type, "drug")) {
@@ -224,72 +171,14 @@ in.development <- 0
 	toc(log = TRUE, quiet = TRUE)
 	lapply(tic.log(format = TRUE), write, "timelog.txt", append = TRUE)
 	tic.clearlog()
-	
-	
 
-
-	
 	# load prior data
 	tic("load prior data     ")
-	if (in.development) {
-		
-		# # MSIGDB
-		# importPriors(
-		# 	path.priors.data = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\exported_datasets_from_Svens_code\\Gene2PathwayMSIGDBdata.txt",
-		# 	path.priors.rows = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\exported_datasets_from_Svens_code\\Gene2PathwayMSIGDBrows.txt",
-		# 	path.priors.cols = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\exported_datasets_from_Svens_code\\Gene2PathwayMSIGDBcols.txt",
-		# 	path.output = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\priors\\msigdb.RData", 
-		# 	perturbations = row.names(scores)
-		# );
-		# 
-		# # STRING
-		# importPriors(
-		# 	path.priors.data = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\exported_datasets_from_Svens_code\\Gene2GeneSTRINGdata.txt",
-		# 	path.priors.rows = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\exported_datasets_from_Svens_code\\Gene2GeneSTRINGrows.txt",
-		# 	path.priors.cols = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\exported_datasets_from_Svens_code\\Gene2GeneSTRINGcols.txt",
-		# 	path.output = "C:\\_Caroline\\Projects\\aida\\development\\Datasets\\priors\\string.RData", 
-		# 	perturbations = row.names(scores)
-		# );
-		
-		# STITCH
-		importPriors(
-			path.priors.data = "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\exported_from_Svens_code\\Gene2DrugSTITCHdata.txt",
-			path.priors.rows = "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\exported_from_Svens_code\\Gene2DrugSTITCHrows.txt",
-			path.priors.cols = "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\exported_from_Svens_code\\Gene2DrugSTITCHcols.txt",
-			path.output = "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\priors\\stitch.RData", 
-			perturbations = row.names(scores)
-		);
-		
-	} else {
-		#load("C:\\_Caroline\\Projects\\aida\\development\\Datasets\\priors\\msigdb.RData")
-		#load("C:\\_Caroline\\Projects\\aida\\development\\Datasets\\priors\\string.RData")
-		load("stitch.RData")
-	}
+	load("stitch.RData")
 	toc(log = TRUE, quiet = TRUE)
 	lapply(tic.log(format = TRUE), write, "timelog.txt", append = TRUE)
 	tic.clearlog()
 	
-	
-	if (in.development) {
-		scores.pos <- as.matrix(fread(input = "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\exported_from_Svens_code\\scores_pos.txt", 
-																	na.strings = c("", "-", "NaN", "NA", "NULL" ), 
-																	showProgress = FALSE, 
-																	sep = "\t"))
-		
-		scores.neg <- as.matrix(fread(input = "C:\\_Caroline\\Projects\\targetTranslator\\development\\Datasets\\exported_from_Svens_code\\scores_neg.txt", 
-																	na.strings = c("", "-", "NaN", "NA", "NULL" ), 
-																	showProgress = FALSE, 
-																	sep = "\t"))
-		
-		scores <- cbind(scores.pos[1, ], scores.neg[1, ])
-		
-		row.names(scores) <- make.names(priors$cols, unique = TRUE)
-
-		save(scores, file = "C:\\Users\\carwa895\\Desktop\\scores.RData")
-		
-	}
-
-
 	# estimate enrichment
 	tic("estimate enrichment ")
 	enrichment <- estimateEnrichment(scores, priors, priors.cutoff = 900, job.id)
@@ -297,50 +186,11 @@ in.development <- 0
 	lapply(tic.log(format = TRUE), write, "timelog.txt", append = TRUE)
 	tic.clearlog()
 	
-	# find all images and put file names in array
-	# TODO: in what order are theses listed?
-	# enrichment.files <- list.files(path = paste("..\\data\\job_", job.id, sep = ""), 
-	# 					 pattern = "enrichment_",
-	# 					 full.names = TRUE)
-	
-	# encode all images and put in array
-	# enrichment.base64 <- lapply(enrichment.files, base64encode)
-	
-	# extract unique id from the first dataset
-	#unique.id <- sub(".*_", "", paths.expression[1], perl = TRUE) # remove first characters up to _
-	#unique.id <- sub("....$", "", unique.id, perl = TRUE) # remove last 4 characters
-
-	# plot enrichment
-	# TODO: never save file, just print to console
-	#png(filename = paste("..\\data\\enrichment_", unique.id, ".png", sep = ""))
-	#plotEnrichment(priors.score, priors$rows, subtypes, 20)
-	#dev.off()
-	
-	# estimate cdf and plot
-	#png(filename = paste("..\\data\\cdf_", unique.id, ".png", sep = ""))
-	# TODO: what to do with the datasets
-	#estimateCDF(scores, priors, target.name = 'MTOR', profile.names = c('proneural','neural','classical','mesenchymal'), priors.cutoff = 700)
-	#dev.off()
-
-	# convert images to base64 and print to console
-	#image.enrichment <- base64encode(paste("..\\data\\enrichment_", unique.id, ".png", sep = ""))
-	#image.cdf <- base64encode(paste("..\\data\\cdf_", unique.id, ".png", sep = ""))
-	
-
 	# print everything to console
 	print(toJSON(result.table))
 	print(toJSON(enrichment))
-	# print(toJSON(enrichment.base64))
-	
-#}
-
 
 }, error = function(e) {
 	errors <- c("error", conditionMessage(e))
 	print(toJSON(errors))
 })
-
-
-
-
-
